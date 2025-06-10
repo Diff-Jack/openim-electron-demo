@@ -111,6 +111,13 @@ const Index: ForwardRefRenderFunction<CKEditorRef, CKEditorProps> = (
         ckEditor.current = editor;
         listenKeydown(editor);
         focus(true);
+        // ✅ 修改编辑区域背景
+        editor.editing.view.change((writer) => {
+          const root = editor.editing.view.document.getRoot();
+          if (root) {
+            writer.setStyle("background-color", "transparent", root);
+          }
+        });
       }}
       onChange={(event, editor) => {
         const data = editor.getData();

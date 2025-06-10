@@ -3,6 +3,8 @@ import { Button } from "antd";
 import { t } from "i18next";
 import { forwardRef, ForwardRefRenderFunction, memo, useState } from "react";
 
+import sendIcon from "@/assets/images/chatFooter/send_enter.png";
+import sendIconGray from "@/assets/images/chatFooter/send_enter_gray.png";
 import CKEditor from "@/components/CKEditor";
 import { getCleanText } from "@/components/CKEditor/utils";
 import i18n from "@/i18n";
@@ -44,14 +46,26 @@ const ChatFooter: ForwardRefRenderFunction<unknown, unknown> = (_, ref) => {
 
   return (
     <footer className="relative h-full bg-white py-px">
-      <div className="flex h-full flex-col border-t border-t-[var(--gap-text)]">
-        <SendActionBar sendMessage={sendMessage} getImageMessage={getImageMessage} />
-        <div className="relative flex flex-1 flex-col overflow-hidden">
+      <div className="flex h-full flex-col border-t border-t-[var(--gap-text)] p-2">
+        {/*<SendActionBar sendMessage={sendMessage} getImageMessage={getImageMessage} />*/}
+        {/*//rgba(212,212,212,0.5)*/}
+        <div className="relative flex flex-1 flex-col overflow-hidden rounded-md bg-[linear-gradient(to_top,rgba(250,250,250,1),rgba(229,229,229,1))]">
           <CKEditor value={html} onEnter={enterToSend} onChange={onChange} />
-          <div className="flex items-center justify-end py-2 pr-3">
-            <Button className="w-fit px-6 py-1" type="primary" onClick={enterToSend}>
-              {t("placeholder.send")}
-            </Button>
+          <div className="flex items-center justify-end py-4 pr-3">
+            {/*<Button className="w-fit px-6 py-1" type="primary" onClick={enterToSend}>*/}
+            {/*  {t("placeholder.send")}*/}
+            {/*</Button>*/}
+            <Button
+              icon={
+                <img
+                  src={html === "" ? sendIconGray : sendIcon}
+                  alt="icon"
+                  className="h-[33px] w-[33px]"
+                />
+              }
+              className="border-0 bg-transparent"
+              onClick={enterToSend}
+            />
           </div>
         </div>
       </div>
