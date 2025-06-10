@@ -2,7 +2,7 @@ import { RightOutlined } from "@ant-design/icons";
 import { Badge, Divider, Layout, Popover, Upload } from "antd";
 import clsx from "clsx";
 import i18n, { t } from "i18next";
-import React, { memo, useRef, useState } from "react";
+import React, { memo, useEffect, useRef, useState } from "react";
 import ImageResizer from "react-image-file-resizer";
 import { UNSAFE_NavigationContext, useResolvedPath } from "react-router-dom";
 
@@ -221,6 +221,36 @@ const LeftNavBar = memo(() => {
       feedbackToast({ error: t("toast.updateAvatarFailed") });
     }
   };
+
+  const { navigator } = React.useContext(UNSAFE_NavigationContext);
+
+  useEffect(() => {
+    const parentOrigin = import.meta.env.VITE_PARENT_IFRAME_ORIGIN as string;
+    const handleMessage = (event: MessageEvent) => {
+      if (event.origin !== parentOrigin) {
+        return;
+      }
+
+      const { action } = (event.data || {}) as {
+        action: "copy_id" | "open_contact";
+      };
+
+      const actionMapper = {
+        copy_id: () => {
+          alert("copy_id");
+        },
+        open_contact: () => {
+          navigator.push("/contact");
+        },
+      };
+
+      actionMapper[action]?.();
+    };
+
+    window.addEventListener("message", handleMessage);
+
+    return () => window.removeEventListener("message", handleMessage);
+  }, []);
 
   const ProfileContent = (
     <div className="w-72 px-2.5 pb-3 pt-5.5">
