@@ -184,6 +184,39 @@
   }
 }
 
+.contact-modal {
+  .ant-modal-content {
+    padding: 0;
+    border-radius: 40px;
+    overflow: hidden;
+    font-family: Roboto;
+  }
+
+  .contact-modal-tabs {
+    flex: 1;
+
+    .ant-tabs-tab {
+      padding: 9px 65px;
+    }
+
+    .ant-tabs-tab-active .ant-tabs-tab-btn {
+      color: #17B0B0;
+    }
+
+    .ant-tabs-ink-bar {
+      background: #A8F4EC;
+    }
+
+    .ant-tabs-content {
+      height: 100%;
+    }
+
+    .ant-tabs-tabpane {
+      height: 100%;
+    }
+  }
+}
+
 .bold-label-form {
   .ant-form-item-label {
     label {

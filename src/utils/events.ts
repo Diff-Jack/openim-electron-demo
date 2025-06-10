@@ -16,8 +16,8 @@ type EmitterEvents = {
   // message store
   PUSH_NEW_MSG: MessageItem;
   UPDATE_ONE_MSG: MessageItem;
-
   SELECT_USER: SelectUserParams;
+  OPEN_CONTACT: undefined
 };
 
 export type SelectUserParams = {

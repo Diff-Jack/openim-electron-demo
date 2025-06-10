@@ -62,7 +62,7 @@ const OIMAvatar: React.FC<IOIMAvatarProps> = (props) => {
         lineHeight: `${size - 2}px`,
         color,
       }}
-      shape="square"
+      shape="circle"
       {...avatarProps}
       className={clsx(
         {

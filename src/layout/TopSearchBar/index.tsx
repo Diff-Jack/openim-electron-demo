@@ -18,6 +18,7 @@ import WindowControlBar from "@/components/WindowControlBar";
 import { CustomType } from "@/constants";
 import { OverlayVisibleHandle } from "@/hooks/useOverlayVisible";
 import ChooseModal, { ChooseModalState } from "@/pages/common/ChooseModal";
+import ContactModal from "@/pages/common/ContactModal";
 import GroupCardModal from "@/pages/common/GroupCardModal";
 import RtcCallModal from "@/pages/common/RtcCallModal";
 import { InviteData } from "@/pages/common/RtcCallModal/data";
@@ -38,6 +39,7 @@ const TopSearchBar = () => {
   const chooseModalRef = useRef<OverlayVisibleHandle>(null);
   const searchModalRef = useRef<OverlayVisibleHandle>(null);
   const rtcRef = useRef<OverlayVisibleHandle>(null);
+  const contectsRef = useRef<OverlayVisibleHandle>(null);
   const [chooseModalState, setChooseModalState] = useState<ChooseModalState>({
     type: "CRATE_GROUP",
   });
@@ -92,17 +94,21 @@ const TopSearchBar = () => {
         });
       }
     };
-
+    const contactHandler = () => {
+      contectsRef.current?.openOverlay();
+    };
     emitter.on("OPEN_USER_CARD", userCardHandler);
     emitter.on("OPEN_GROUP_CARD", openGroupCardWithData);
     emitter.on("OPEN_CHOOSE_MODAL", chooseModalHandler);
     emitter.on("OPEN_RTC_MODAL", callRtcHandler);
+    emitter.on("OPEN_CONTACT", contactHandler);
     IMSDK.on(CbEvents.OnRecvNewMessages, newMessageHandler);
     return () => {
       emitter.off("OPEN_USER_CARD", userCardHandler);
       emitter.off("OPEN_GROUP_CARD", openGroupCardWithData);
       emitter.off("OPEN_CHOOSE_MODAL", chooseModalHandler);
       emitter.off("OPEN_RTC_MODAL", callRtcHandler);
+      emitter.off("OPEN_CONTACT", contactHandler);
       IMSDK.off(CbEvents.OnRecvNewMessages, newMessageHandler);
     };
   }, []);
@@ -144,7 +150,7 @@ const TopSearchBar = () => {
   }, []);
 
   return (
-    <div className="no-mobile app-drag flex h-10 min-h-[40px] items-center bg-[var(--top-search-bar)] dark:bg-[#141414]">
+    <div className="no-mobile app-drag flex h-0 opacity-0">
       <div className="flex w-full items-center justify-center">
         <div className="app-no-drag flex h-[26px] w-1/3 items-center justify-center rounded-md bg-[rgba(255,255,255,0.2)]"></div>
         <Popover
@@ -175,6 +181,7 @@ const TopSearchBar = () => {
         openGroupCardWithData={openGroupCardWithData}
       />
       <RtcCallModal ref={rtcRef} inviteData={inviteData} />
+      <ContactModal ref={contectsRef} />
     </div>
   );
 };

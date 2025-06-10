@@ -1,9 +1,11 @@
 import { useMount } from "ahooks";
 import { Layout, Spin } from "antd";
 import { t } from "i18next";
+import React, { useEffect } from "react";
 import { Outlet, useMatches, useNavigate } from "react-router-dom";
 
 import { useUserStore } from "@/store";
+import { emit } from "@/utils/events";
 
 import LeftNavBar from "./LeftNavBar";
 import TopSearchBar from "./TopSearchBar";
@@ -31,6 +33,34 @@ export const MainContentLayout = () => {
 
   const loadingTip = isLogining ? t("toast.loading") : `${progress}%`;
   const showLockLoading = isLogining || (reinstall && syncState === "loading");
+
+  useEffect(() => {
+    const parentOrigin = import.meta.env.VITE_PARENT_IFRAME_ORIGIN as string;
+    const handleMessage = (event: MessageEvent) => {
+      if (event.origin !== parentOrigin) {
+        return;
+      }
+
+      const { action } = (event.data || {}) as {
+        action: "copy_id" | "open_contact";
+      };
+
+      const actionMapper = {
+        copy_id: () => {
+          alert("copy_id");
+        },
+        open_contact: () => {
+          emit("OPEN_CONTACT");
+        },
+      };
+
+      actionMapper[action]?.();
+    };
+
+    window.addEventListener("message", handleMessage);
+
+    return () => window.removeEventListener("message", handleMessage);
+  }, []);
 
   return (
     <Spin className="!max-h-none" spinning={showLockLoading} tip={loadingTip}>

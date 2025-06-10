@@ -377,7 +377,9 @@
     "forbidAddMember": "不允许添加群成员为好友",
     "applyNeedInvite": "群成员邀请无需验证",
     "applyNeedVerification": "需要发送验证消息",
-    "applyAll": "允许所有人加群"
+    "applyAll": "允许所有人加群",
+    "requests": "新的好友",
+    "searchFriends": "搜索"
   },
   "empty": {
     "noMoments": "暂无动态",
