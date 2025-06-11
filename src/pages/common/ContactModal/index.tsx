@@ -1,12 +1,19 @@
 import type { TabsProps } from "antd";
 import { Flex, Modal, Tabs } from "antd";
-import { forwardRef, ForwardRefRenderFunction, memo } from "react";
+import {
+  ChangeEvent,
+  forwardRef,
+  ForwardRefRenderFunction,
+  memo,
+  useEffect,
+} from "react";
 import { useTranslation } from "react-i18next";
 
 import AddIcon from "@/assets/images/contactModal/add.png";
 import CloseIcon from "@/assets/images/contactModal/close.png";
 import Searchbar from "@/components/SearchBar";
 import { OverlayVisibleHandle, useOverlayVisible } from "@/hooks/useOverlayVisible";
+import { useContactStore } from "@/store";
 
 import { MyFriends } from "./myFriends";
 
@@ -45,6 +52,20 @@ interface ContactProps {
 const Contact = ({ onClose }: ContactProps) => {
   const { t } = useTranslation();
 
+  const searchFriends = useContactStore((state) => state.searchFriends);
+
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const keyword = event.target.value;
+
+    searchFriends(keyword);
+  };
+
+  useEffect(() => {
+    return () => {
+      searchFriends("");
+    };
+  }, []);
+
   return (
     <Flex
       vertical
@@ -60,7 +81,10 @@ const Contact = ({ onClose }: ContactProps) => {
         {t("placeholder.myFriend")}
       </div>
       <Flex gap={20} className="mb-[18px] flex items-center">
-        <Searchbar placeholder={t("placeholder.searchFriends")} />
+        <Searchbar
+          placeholder={t("placeholder.searchFriends")}
+          onChange={handleInputChange}
+        />
         <div className="flex-shrink-0 cursor-pointer">
           <img width="44" src={AddIcon} alt="" />
         </div>

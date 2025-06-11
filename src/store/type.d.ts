@@ -48,9 +48,7 @@ export interface ConversationStore {
   unReadCount: number;
   currentGroupInfo?: GroupItem;
   currentMemberInGroup?: GroupMemberItem;
-  getConversationListByReq: (
-    isOffset?: boolean
-  ) => Promise<boolean>;
+  getConversationListByReq: (isOffset?: boolean) => Promise<boolean>;
   updateConversationList: (
     list: ConversationItem[],
     type: ConversationListUpdateType,
@@ -101,4 +99,5 @@ export interface ContactStore {
   updateUnHandleFriendApplicationCount: (num: number) => void;
   updateUnHandleGroupApplicationCount: (num: number) => void;
   clearContactStore: () => void;
+  searchFriends: (keyword: string | undefined) => Promise<void>;
 }

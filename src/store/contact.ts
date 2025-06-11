@@ -155,8 +155,7 @@ export const useContactStore = create<ContactStore>()((set, get) => ({
     }
     if (idx < 0 || isHandleResultUpdate) {
       const unHandleFriendApplicationCount = tmpList.filter(
-        (application) =>
-          application.handleResult === 0,
+        (application) => application.handleResult === 0,
       ).length;
       set(() => ({
         recvFriendApplicationList: tmpList,
@@ -204,8 +203,7 @@ export const useContactStore = create<ContactStore>()((set, get) => ({
     }
     if (idx < 0 || application.handleResult === ApplicationHandleResult.Unprocessed) {
       const unHandleGroupApplicationCount = tmpList.filter(
-        (application) =>
-          application.handleResult === 0
+        (application) => application.handleResult === 0,
       ).length;
       set(() => ({ recvGroupApplicationList: tmpList, unHandleGroupApplicationCount }));
       return;
@@ -248,5 +246,21 @@ export const useContactStore = create<ContactStore>()((set, get) => ({
       unHandleFriendApplicationCount: 0,
       unHandleGroupApplicationCount: 0,
     }));
+  },
+  searchFriends: async (keyword) => {
+    if (!keyword) {
+      return get().getFriendListByReq();
+    }
+
+    const { data } = await IMSDK.searchFriends({
+      keywordList: [keyword],
+      isSearchNickname: true,
+      isSearchRemark: false,
+      isSearchUserID: true,
+    });
+
+    set({
+      friendList: data,
+    });
   },
 }));
