@@ -1,6 +1,5 @@
-import { CloseOutlined } from "@ant-design/icons";
 import { GroupItem, WSEvent } from "@openim/wasm-client-sdk/lib/types/entity";
-import { Button, Input, InputRef } from "antd";
+import { Button, InputRef } from "antd";
 import { t } from "i18next";
 import {
   forwardRef,
@@ -13,7 +12,9 @@ import {
 
 import { message } from "@/AntdGlobalComp";
 import { searchBusinessUserInfo } from "@/api/login";
+import CloseIcon from "@/assets/images/common/close.png";
 import DraggableModalWrap from "@/components/DraggableModalWrap";
+import Searchbar from "@/components/SearchBar";
 import { OverlayVisibleHandle, useOverlayVisible } from "@/hooks/useOverlayVisible";
 import { CardInfo } from "@/pages/common/UserCardModal";
 import { useContactStore } from "@/store";
@@ -101,7 +102,7 @@ const SearchUserOrGroup: ForwardRefRenderFunction<
       footer={null}
       open={isOverlayOpen}
       closable={false}
-      width={332}
+      width={393}
       onCancel={closeOverlay}
       styles={{
         mask: {
@@ -109,53 +110,43 @@ const SearchUserOrGroup: ForwardRefRenderFunction<
           transition: "none",
         },
       }}
+      zIndex={1001}
       afterClose={() => {
         setKeyword("");
       }}
+      centered
       ignoreClasses=".ignore-drag, .cursor-pointer"
-      className="no-padding-modal"
+      className="add-model"
       maskTransitionName=""
     >
-      <div className="flex h-12 items-center justify-between bg-[var(--gap-text)] px-5.5">
-        <div>
+      <div className="relative box-border px-[24px] pb-[40px] pt-[52px]">
+        <div
+          className="absolute right-[22px] top-[22px] cursor-pointer"
+          onClick={closeOverlay}
+        >
+          <img width={24} src={CloseIcon} alt="" />
+        </div>
+        <div className="mb-6 text-center text-xl font-medium">
           {isSearchGroup ? t("placeholder.addGroup") : t("placeholder.addFriends")}
         </div>
-        <CloseOutlined
-          className="cursor-pointer text-[var(--sub-text)]"
-          rev={undefined}
-          onClick={closeOverlay}
+        <Searchbar
+          className="mb-6"
+          value={keyword}
+          onChange={(e) => {
+            setKeyword(e.target.value);
+          }}
         />
-      </div>
-      <div className="ignore-drag">
-        <div className="border-b border-[var(--gap-text)] px-5.5 py-6">
-          <Input.Search
-            ref={inputRef}
-            className="no-addon-search"
-            placeholder={t("placeholder.pleaseEnter")}
-            value={keyword}
-            addonAfter={null}
-            spellCheck={false}
-            onChange={(e) => setKeyword(e.target.value)}
-            onSearch={searchData}
-          />
-        </div>
-        <div className="flex justify-end px-5.5 py-2.5">
-          <Button
-            loading={loading}
-            className="px-6"
-            type="primary"
-            disabled={!keyword}
-            onClick={searchData}
-          >
-            {t("confirm")}
-          </Button>
-          <Button
-            className="ml-3 border-0 bg-[var(--chat-bubble)] px-6"
-            onClick={closeOverlay}
-          >
-            {t("cancel")}
-          </Button>
-        </div>
+        <Button
+          loading={loading}
+          className="px-6"
+          type="primary"
+          block
+          disabled={!keyword}
+          size="large"
+          onClick={searchData}
+        >
+          {t("confirm")}
+        </Button>
       </div>
     </DraggableModalWrap>
   );

@@ -97,11 +97,16 @@ const TopSearchBar = () => {
     const contactHandler = () => {
       contectsRef.current?.openOverlay();
     };
+    const addHandler = (idx: number) => {
+      setIsSearchGroup(Boolean(idx));
+      searchModalRef.current?.openOverlay();
+    };
     emitter.on("OPEN_USER_CARD", userCardHandler);
     emitter.on("OPEN_GROUP_CARD", openGroupCardWithData);
     emitter.on("OPEN_CHOOSE_MODAL", chooseModalHandler);
     emitter.on("OPEN_RTC_MODAL", callRtcHandler);
     emitter.on("OPEN_CONTACT", contactHandler);
+    emitter.on("OPEN_ADD", addHandler);
     IMSDK.on(CbEvents.OnRecvNewMessages, newMessageHandler);
     return () => {
       emitter.off("OPEN_USER_CARD", userCardHandler);
@@ -109,6 +114,7 @@ const TopSearchBar = () => {
       emitter.off("OPEN_CHOOSE_MODAL", chooseModalHandler);
       emitter.off("OPEN_RTC_MODAL", callRtcHandler);
       emitter.off("OPEN_CONTACT", contactHandler);
+      emitter.off("OPEN_ADD", addHandler);
       IMSDK.off(CbEvents.OnRecvNewMessages, newMessageHandler);
     };
   }, []);

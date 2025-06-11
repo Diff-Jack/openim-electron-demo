@@ -10,10 +10,11 @@ import {
 import { useTranslation } from "react-i18next";
 
 import AddIcon from "@/assets/images/contactModal/add.png";
-import CloseIcon from "@/assets/images/contactModal/close.png";
+import CloseIcon from "@/assets/images/common/close.png";
 import Searchbar from "@/components/SearchBar";
 import { OverlayVisibleHandle, useOverlayVisible } from "@/hooks/useOverlayVisible";
 import { useContactStore } from "@/store";
+import { emit } from "@/utils/events";
 
 import { MyFriends } from "./myFriends";
 
@@ -60,6 +61,10 @@ const Contact = ({ onClose }: ContactProps) => {
     searchFriends(keyword);
   };
 
+  const handleAddFriend = () => {
+    emit("OPEN_ADD", 0);
+  };
+
   useEffect(() => {
     return () => {
       searchFriends("");
@@ -85,7 +90,7 @@ const Contact = ({ onClose }: ContactProps) => {
           placeholder={t("placeholder.searchFriends")}
           onChange={handleInputChange}
         />
-        <div className="flex-shrink-0 cursor-pointer">
+        <div className="flex-shrink-0 cursor-pointer" onClick={handleAddFriend}>
           <img width="44" src={AddIcon} alt="" />
         </div>
       </Flex>
