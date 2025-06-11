@@ -26,6 +26,19 @@ function App() {
       locale={locale === "zh-CN" ? zhCN : enUS}
       theme={{
         token: { colorPrimary: "#0089FF" },
+        components: {
+          Input: {
+            activeBg: "rgba(36, 34, 32, 0.04)",
+            hoverBg: "rgba(36, 34, 32, 0.04)",
+            activeBorderColor: "#39E9B4",
+            hoverBorderColor: "#39E9B4",
+            fontSize: 14,
+            colorBorder: "rgba(36,34,32,0.04)",
+            colorText: "#000000",
+            lineHeight: 1.142,
+            colorTextPlaceholder: "#B0B0B0",
+          },
+        },
       }}
     >
       <QueryClientProvider client={queryClient}>

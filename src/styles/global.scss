@@ -166,3 +166,11 @@ img {
 .lk-participant-media-video {
   object-fit: contain !important;
 }
+
+.ant-input-affix-wrapper {
+  background-color: rgba(36, 34, 32, 0.04);
+  .ant-input {
+    caret-color: #39E9B4;
+    background-color: transparent;
+  }
+}
