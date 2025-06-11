@@ -1,40 +1,41 @@
 .message-container {
-  @apply flex flex-1 overflow-hidden;
+  @apply flex flex-1 flex-col overflow-hidden;
+
+  .message-profile {
+    @apply mb-1 flex items-center w-full text-xs;
+  }
 
   .message-wrap {
-    @apply ml-3 flex flex-1 flex-col overflow-hidden;
-
-    .message-profile {
-      @apply mb-1 flex w-full text-xs;
-    }
+    @apply flex flex-1 flex-col overflow-hidden;
 
     .bubble {
-      @apply w-fit rounded-md p-2.5;
+      @apply w-fit rounded-md py-1;
       word-break: break-all;
-      background-color: var(--chat-bubble);
+      //background-color: var(--chat-bubble);
+      background-color: transparent;
     }
 
     .suffix {
       @apply ml-3 flex items-center;
     }
-  }
 
-  .menu-wrap {
-    @apply flex w-fit;
+    .menu-wrap {
+      @apply flex w-fit;
+    }
   }
 
   &-sender {
-    @apply flex-row-reverse;
+
+    .message-profile {
+      @apply flex-row-reverse;
+    }
 
     .message-wrap {
-      @apply mr-3 items-end;
-
-      .message-profile {
-        @apply flex-row-reverse;
-      }
+      @apply items-end;
 
       .bubble {
-        background-color: var(--chat-bubble-sender);
+        //background-color: var(--chat-bubble-sender);
+        background-color: transparent;
       }
 
       .suffix {

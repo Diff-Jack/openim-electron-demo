@@ -44,7 +44,7 @@ const ChatContent = () => {
 
   return (
     <Layout.Content
-      className="relative flex h-full overflow-hidden !bg-white"
+      className="relative flex h-full overflow-hidden !bg-transparent"
       id="chat-main"
     >
       {loadState.initLoading ? (

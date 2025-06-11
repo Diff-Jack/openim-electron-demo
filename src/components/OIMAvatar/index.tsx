@@ -23,7 +23,7 @@ const OIMAvatar: React.FC<IOIMAvatarProps> = (props) => {
     text,
     size = 42,
     color = "#fff",
-    bgColor = "#0289FA",
+    bgColor = "#17B09E",
     isgroup = false,
     isnotification,
   } = props;

@@ -25,6 +25,8 @@ export const QueryChat = () => {
 
   return (
     <Layout id="chat-container" className="relative overflow-hidden">
+      <div className="fixed top-0 h-[65vh] w-full bg-white bg-cover" />
+      <div className="fixed bottom-0 h-[35vh] w-full bg-[linear-gradient(to_bottom,rgba(255,255,255,1),rgba(235,255,250,1))] bg-cover" />
       <ChatHeader />
       <PanelGroup direction="vertical">
         <Panel id="chat-main" order={0}>
@@ -34,9 +36,9 @@ export const QueryChat = () => {
         <Panel
           id="chat-footer"
           order={1}
-          defaultSize={25}
+          defaultSize={20}
           maxSize={60}
-          className="min-h-[200px]"
+          className="min-h-[150px]"
         >
           <ChatFooter />
         </Panel>

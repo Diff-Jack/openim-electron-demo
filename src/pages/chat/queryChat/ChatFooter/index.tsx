@@ -45,11 +45,9 @@ const ChatFooter: ForwardRefRenderFunction<unknown, unknown> = (_, ref) => {
   };
 
   return (
-    <footer className="relative h-full bg-white py-px">
-      <div className="flex h-full flex-col border-t border-t-[var(--gap-text)] p-2">
-        {/*<SendActionBar sendMessage={sendMessage} getImageMessage={getImageMessage} />*/}
-        {/*//rgba(212,212,212,0.5)*/}
-        <div className="relative flex flex-1 flex-col overflow-hidden rounded-md bg-[linear-gradient(to_top,rgba(250,250,250,1),rgba(229,229,229,1))]">
+    <footer className="relative h-full bg-transparent p-2">
+      <div className="flex h-full flex-col rounded-md border-[1px] border-[rgb(229,229,229,0.5)] bg-white p-2">
+        <div className="relative flex flex-1 flex-col overflow-hidden rounded-md border-[1px] border-[rgb(212,212,212,0.5)] bg-[linear-gradient(to_top,rgba(250,250,250,0.51),rgba(229,229,229,0.51))]">
           <CKEditor value={html} onEnter={enterToSend} onChange={onChange} />
           <div className="flex items-center justify-end py-4 pr-3">
             {/*<Button className="w-fit px-6 py-1" type="primary" onClick={enterToSend}>*/}

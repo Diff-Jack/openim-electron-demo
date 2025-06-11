@@ -53,28 +53,24 @@ const MessageItem: FC<IMessageItemProps> = ({
             isSender && styles["message-container-sender"],
           )}
         >
-          <OIMAvatar
-            size={36}
-            src={message.senderFaceUrl}
-            text={message.senderNickname}
-          />
+          <div className={styles["message-profile"]}>
+            <OIMAvatar
+              size={20}
+              src={message.senderFaceUrl}
+              text={message.senderNickname}
+            />
+            <div
+              title={message.senderNickname}
+              className={clsx("max-w-[30%] truncate text-[var(--sub-text)]", "px-2")}
+            >
+              {message.senderNickname}
+            </div>
+            <div className="text-[var(--sub-text)]">
+              {formatMessageTime(message.sendTime)}
+            </div>
+          </div>
 
           <div className={styles["message-wrap"]} ref={messageWrapRef}>
-            <div className={styles["message-profile"]}>
-              <div
-                title={message.senderNickname}
-                className={clsx(
-                  "max-w-[30%] truncate text-[var(--sub-text)]",
-                  isSender ? "ml-2" : "mr-2",
-                )}
-              >
-                {message.senderNickname}
-              </div>
-              <div className="text-[var(--sub-text)]">
-                {formatMessageTime(message.sendTime)}
-              </div>
-            </div>
-
             <div className={styles["menu-wrap"]}>
               <MessageItemErrorBoundary message={message}>
                 <MessageRenderComponent

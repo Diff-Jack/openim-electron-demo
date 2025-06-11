@@ -6,10 +6,12 @@
   --primary: #0089ff;
   --primary-active: #f3f8ff;
   --top-search-bar: #0289fa;
-  --sub-text: #8e9ab0;
+  //--sub-text: #8e9ab0;
+  --sub-text: #737373;
   --gap-text: #e8eaef;
   --warn-text: #ff381f;
   --moment-text: #6085b1;
+  --co-link-text: #17B09E;
   --searchbar-height: 2.5rem;
 }
 
@@ -90,7 +92,8 @@ body,
 }
 
 .link-el {
-  color: var(--primary);
+  //color: var(--primary);
+  color: var(--co-link-text);
   cursor: pointer;
 }
 
