@@ -17,7 +17,9 @@ type EmitterEvents = {
   PUSH_NEW_MSG: MessageItem;
   UPDATE_ONE_MSG: MessageItem;
   SELECT_USER: SelectUserParams;
-  OPEN_CONTACT: undefined
+  OPEN_CONTACT: void
+  /** 0-add friend, 1-add group */
+  OPEN_ADD: number
 };
 
 export type SelectUserParams = {
