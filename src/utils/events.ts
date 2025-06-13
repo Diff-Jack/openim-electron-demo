@@ -18,6 +18,7 @@ type EmitterEvents = {
   UPDATE_ONE_MSG: MessageItem;
   SELECT_USER: SelectUserParams;
   OPEN_CONTACT: void
+  COPY_ID: 'open' | 'close';
   /** 0-add friend, 1-add group */
   OPEN_ADD: number
 };

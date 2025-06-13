@@ -378,7 +378,8 @@
     "applyNeedVerification": "Verification message required",
     "applyAll": "Allow everyone to join the group",
     "requests": "Requests",
-    "searchFriends": "search"
+    "searchFriends": "search",
+    "yourId": "Your ID"
   },
   "empty": {
     "noMoments": "No moments available",
@@ -476,5 +477,9 @@
     "invitationCodeUsed": "Invitation code already used",
     "invitationCodeNotExist": "Invitation code does not exist",
     "operationRestriction": "Operation restricted"
+  },
+  "copy": {
+    "label": "Copy",
+    "success": "Copy success"
   }
 }

@@ -42,15 +42,20 @@ export const MainContentLayout = () => {
       }
 
       const { action } = (event.data || {}) as {
-        action: "copy_id" | "open_contact";
+        action: "copy_id" | "open_contact" | "open_messages";
       };
 
       const actionMapper = {
         copy_id: () => {
-          alert("copy_id");
+          emit("COPY_ID", "open");
         },
         open_contact: () => {
-          emit("OPEN_CONTACT");
+          emit("COPY_ID", "close");
+          navigate("/contact");
+        },
+        open_messages: () => {
+          emit("COPY_ID", "close");
+          navigate("/chat");
         },
       };
 

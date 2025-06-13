@@ -19,6 +19,7 @@ import { CustomType } from "@/constants";
 import { OverlayVisibleHandle } from "@/hooks/useOverlayVisible";
 import ChooseModal, { ChooseModalState } from "@/pages/common/ChooseModal";
 import ContactModal from "@/pages/common/ContactModal";
+import CopyIdModal from "@/pages/common/CopyIdModal";
 import GroupCardModal from "@/pages/common/GroupCardModal";
 import RtcCallModal from "@/pages/common/RtcCallModal";
 import { InviteData } from "@/pages/common/RtcCallModal/data";
@@ -40,6 +41,7 @@ const TopSearchBar = () => {
   const searchModalRef = useRef<OverlayVisibleHandle>(null);
   const rtcRef = useRef<OverlayVisibleHandle>(null);
   const contectsRef = useRef<OverlayVisibleHandle>(null);
+  const copyIdRef = useRef<OverlayVisibleHandle>(null);
   const [chooseModalState, setChooseModalState] = useState<ChooseModalState>({
     type: "CRATE_GROUP",
   });
@@ -101,12 +103,17 @@ const TopSearchBar = () => {
       setIsSearchGroup(Boolean(idx));
       searchModalRef.current?.openOverlay();
     };
+    const copyIdHandler = (status: "open" | "close") => {
+      const operate = status === "open" ? "openOverlay" : "closeOverlay";
+      copyIdRef.current?.[operate]?.();
+    };
     emitter.on("OPEN_USER_CARD", userCardHandler);
     emitter.on("OPEN_GROUP_CARD", openGroupCardWithData);
     emitter.on("OPEN_CHOOSE_MODAL", chooseModalHandler);
     emitter.on("OPEN_RTC_MODAL", callRtcHandler);
     emitter.on("OPEN_CONTACT", contactHandler);
     emitter.on("OPEN_ADD", addHandler);
+    emitter.on("COPY_ID", copyIdHandler);
     IMSDK.on(CbEvents.OnRecvNewMessages, newMessageHandler);
     return () => {
       emitter.off("OPEN_USER_CARD", userCardHandler);
@@ -115,6 +122,7 @@ const TopSearchBar = () => {
       emitter.off("OPEN_RTC_MODAL", callRtcHandler);
       emitter.off("OPEN_CONTACT", contactHandler);
       emitter.off("OPEN_ADD", addHandler);
+      emitter.off("COPY_ID", copyIdHandler);
       IMSDK.off(CbEvents.OnRecvNewMessages, newMessageHandler);
     };
   }, []);
@@ -188,6 +196,7 @@ const TopSearchBar = () => {
       />
       <RtcCallModal ref={rtcRef} inviteData={inviteData} />
       <ContactModal ref={contectsRef} />
+      <CopyIdModal ref={copyIdRef} />
     </div>
   );
 };

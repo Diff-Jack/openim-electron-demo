@@ -379,7 +379,8 @@
     "applyNeedVerification": "需要发送验证消息",
     "applyAll": "允许所有人加群",
     "requests": "新的好友",
-    "searchFriends": "搜索"
+    "searchFriends": "搜索",
+    "yourId": "你的 ID"
   },
   "empty": {
     "noMoments": "暂无动态",
@@ -477,5 +478,9 @@
     "invitationCodeUsed": "邀请码已被使用",
     "invitationCodeNotExist": "邀请码不存在",
     "operationRestriction": "操作限制"
+  },
+  "copy": {
+    "label": "复制",
+    "success": "复制成功"
   }
 }
