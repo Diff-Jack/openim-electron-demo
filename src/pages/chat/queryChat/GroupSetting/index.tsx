@@ -3,10 +3,9 @@ import { t } from "i18next";
 import { forwardRef, ForwardRefRenderFunction, memo, useRef, useState } from "react";
 
 import { OverlayVisibleHandle, useOverlayVisible } from "@/hooks/useOverlayVisible";
+import GroupInfo from "@/pages/chat/queryChat/GroupSetting/GroupInfo";
 
 import GroupMemberList from "./GroupMemberList";
-import GroupMemberListHeader from "./GroupMemberListHeader";
-import GroupSettings from "./GroupSettings";
 
 const GroupSetting: ForwardRefRenderFunction<OverlayVisibleHandle, unknown> = (
   _,
@@ -22,13 +21,13 @@ const GroupSetting: ForwardRefRenderFunction<OverlayVisibleHandle, unknown> = (
 
   return (
     <Drawer
-      title={
-        !isPreviewMembers ? (
-          t("placeholder.setting")
-        ) : (
-          <GroupMemberListHeader back2Settings={closePreviewMembers} />
-        )
-      }
+      // title={
+      //   !isPreviewMembers ? (
+      //     t("placeholder.setting")
+      //   ) : (
+      //     <GroupMemberListHeader back2Settings={closePreviewMembers} />
+      //   )
+      // }
       destroyOnClose
       placement="right"
       rootClassName="chat-drawer"
@@ -47,7 +46,7 @@ const GroupSetting: ForwardRefRenderFunction<OverlayVisibleHandle, unknown> = (
       getContainer={"#chat-container"}
     >
       {!isPreviewMembers ? (
-        <GroupSettings
+        <GroupInfo
           closeOverlay={closeOverlay}
           updateTravel={() => setIsPreviewMembers(true)}
         />

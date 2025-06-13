@@ -64,7 +64,7 @@ const EditableContent: FC<IEditableContentProps> = ({
   };
 
   return (
-    <div ref={wrapRef} className={clsx("ml-3 flex items-center", className)}>
+    <div ref={wrapRef} className={clsx("mt-2 flex items-center", className)}>
       {editState.isEdit ? (
         <Input
           spellCheck={false}
@@ -80,13 +80,11 @@ const EditableContent: FC<IEditableContentProps> = ({
         />
       ) : (
         <>
-          <div className={clsx("mr-1 max-w-[240px] truncate", textClassName)}>
-            {value}
-          </div>
+          <div className={clsx("max-w-[240px] truncate", textClassName)}>{value}</div>
           {editable && (
             <img
-              className="cursor-pointer"
-              width={14}
+              className="ml-2 cursor-pointer"
+              width={16}
               src={edit_name}
               alt="edit name"
               onClick={toggleEdit}
