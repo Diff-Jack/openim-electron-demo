@@ -99,6 +99,7 @@
     "localforage": "^1.10.0",
     "md5": "^2.3.0",
     "mitt": "^3.0.0",
+    "motion": "^12.18.1",
     "react-draggable": "^4.4.5",
     "react-i18next": "^12.3.1",
     "react-image-file-resizer": "^0.4.8",

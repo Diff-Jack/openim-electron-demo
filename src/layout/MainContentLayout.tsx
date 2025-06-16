@@ -103,7 +103,7 @@ export const MainContentLayout = () => {
       <Layout className="h-full">
         <TopSearchBar />
         <Layout>
-          <LeftNavBar />
+          {/*<LeftNavBar />*/}
           <Outlet />
         </Layout>
       </Layout>

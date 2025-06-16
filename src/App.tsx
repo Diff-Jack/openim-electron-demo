@@ -38,6 +38,9 @@ function App() {
             lineHeight: 1.142,
             colorTextPlaceholder: "#B0B0B0",
           },
+          Layout: {
+            bodyBg: "#FFFFFF",
+          },
         },
       }}
     >
