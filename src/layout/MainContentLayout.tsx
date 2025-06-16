@@ -53,11 +53,11 @@ export const MainContentLayout = () => {
         return;
       }
 
-      const { action } = (event.data || {}) as {
-        action: "copy_id" | "open_contact" | "open_messages";
+      const { eventName } = (event.data || {}) as {
+        eventName: "copy_id" | "open_contact" | "open_messages";
       };
 
-      const actionMapper = {
+      const mapper = {
         copy_id: () => {
           emit("COPY_ID", "open");
         },
@@ -71,7 +71,7 @@ export const MainContentLayout = () => {
         },
       };
 
-      actionMapper[action]?.();
+      mapper[eventName]?.();
     };
 
     window.addEventListener("message", handleMessage);
@@ -82,7 +82,7 @@ export const MainContentLayout = () => {
   const sendUnreadCount = (id: "messages" | "contacts", count?: number) => {
     window.parent.postMessage(
       {
-        action: "update_unread_count",
+        eventName: "update_unread_count",
         id: id,
         count: count,
       },
