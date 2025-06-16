@@ -28,6 +28,7 @@ const FlexibleSider = ({
       {children}
     </div>
     <div className={styles.sider_resize}></div>
+    <div className={styles.sider_bar}></div>
   </aside>
 );
 
