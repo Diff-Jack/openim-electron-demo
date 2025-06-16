@@ -29,6 +29,7 @@ import emitter, { OpenUserCardParams } from "@/utils/events";
 
 import { IMSDK } from "../MainContentWrap";
 import SearchUserOrGroup from "./SearchUserOrGroup";
+import SimpleUserCard from "@/pages/common/UserCardModal/SimpleUserCard";
 
 type UserCardState = OpenUserCardParams & {
   cardInfo?: CardInfo;
@@ -185,7 +186,8 @@ const TopSearchBar = () => {
         </Popover>
       </div>
       <WindowControlBar />
-      <UserCardModal ref={userCardRef} {...userCardState} />
+      {/*<UserCardModal ref={userCardRef} {...userCardState} />*/}
+      <SimpleUserCard ref={userCardRef} {...userCardState} />
       <GroupCardModal ref={groupCardRef} groupData={groupCardData} />
       <ChooseModal ref={chooseModalRef} state={chooseModalState} />
       <SearchUserOrGroup
