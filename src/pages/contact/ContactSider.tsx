@@ -143,7 +143,7 @@ const ContactSider = () => {
                   <img
                     alt={item.label}
                     src={item.icon}
-                    className="mr-4.5 w-[60px] h-auto rounded-md"
+                    className="mr-4.5 h-auto w-[60px] rounded-md"
                   />
                 </Badge>
                 <div className="text-base text-[#494949]">{item.label}</div>

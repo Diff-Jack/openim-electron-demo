@@ -32,11 +32,11 @@ const AlphabetIndex: ForwardRefRenderFunction<
   );
 
   return (
-    <div className="absolute right-3 top-14 z-10 flex scale-90 flex-col items-center">
+    <div className="absolute right-3 top-0 z-10 flex scale-90 flex-col items-center">
       {indexList.map((letter, idx) => (
         <span
           className={clsx("my-0.5 cursor-pointer text-xs text-[var(--sub-text)]", {
-            "!text-[#0289FAFF]": currentAlphabet === letter,
+            "!text-[#17B0B0]": currentAlphabet === letter,
           })}
           key={letter}
           onClick={() => jumpToLetter(idx, letter)}

@@ -72,13 +72,16 @@ export const MyFriends = () => {
 
   return (
     <div className="flex h-full w-full flex-col overflow-hidden bg-white">
-      <div className="m-5.5 text-base font-extrabold">{t("placeholder.myFriend")}</div>
+      <div className="mb-5 mt-6 text-center text-base font-extrabold">
+        {t("placeholder.myFriend")}
+      </div>
+      <div className="fixed bottom-0 h-[35vh] w-full bg-[linear-gradient(to_bottom,rgba(255,255,255,1),rgba(235,255,250,1))] bg-cover" />
       {!sectionData ? (
         <Spin />
       ) : !sectionData.groupCounts.length ? (
         <Empty className="mt-[30%]" image={Empty.PRESENTED_IMAGE_SIMPLE} />
       ) : (
-        <div className="ml-4 mt-4 flex-1 overflow-auto pr-4">
+        <div className="relative mt-4 flex-1 overflow-auto pl-10 pr-4">
           <AlphabetIndex
             ref={alphabetRef}
             indexList={sectionData.indexList}
@@ -89,11 +92,8 @@ export const MyFriends = () => {
             ref={virtuoso}
             groupCounts={sectionData.groupCounts}
             groupContent={(index) => (
-              <div>
-                <div className="bg-white px-3.5 pb-1 text-sm text-[#8E9AB0FF]">
-                  {sectionData.indexList[index]}
-                </div>
-                <div className="mx-3.5 mb-3 h-px w-full bg-[#E8EAEFFF] bg-white" />
+              <div className="bg-white pb-4 text-[15px] leading-[16px] text-[#B0B0B0]">
+                {sectionData.indexList[index]}
               </div>
             )}
             itemContent={(index) => {

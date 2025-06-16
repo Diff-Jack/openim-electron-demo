@@ -11,11 +11,20 @@ const FriendListItem = ({
 }) => {
   return (
     <div
-      className="flex items-center rounded-md px-3.5 pb-3 pt-2.5 transition-colors hover:bg-[var(--primary-active)]"
+      className="mb-2 flex items-center rounded-md pb-2 pl-2 pt-2 transition-colors hover:bg-[#F3F3F3]"
       onClick={() => showUserCard(friend.userID)}
     >
-      <OIMAvatar src={friend.faceURL} text={friend.remark || friend.nickname} />
-      <div className="ml-3 truncate text-sm">{friend.remark || friend.nickname}</div>
+      <OIMAvatar
+        size={48}
+        src={friend.faceURL}
+        text={friend.remark || friend.nickname}
+      />
+      <div className="ml-6">
+        <div className="mb-[6px] truncate text-sm text-[#000000]">
+          {friend.nickname}
+        </div>
+        <div className="text-xs text-[#B0B0B0]">{friend.remark}</div>
+      </div>
     </div>
   );
 };
