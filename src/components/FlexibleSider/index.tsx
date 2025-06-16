@@ -21,7 +21,7 @@ const FlexibleSider = ({
     )}
   >
     <div
-      className={`absolute bottom-0 left-0 right-0 top-0 z-10 overflow-hidden rounded-r-[12px] ${
+      className={`absolute bottom-0 left-0 right-[1px] top-0 z-10 overflow-hidden rounded-r-[12px] ${
         wrapClassName ?? ""
       }`}
     >
