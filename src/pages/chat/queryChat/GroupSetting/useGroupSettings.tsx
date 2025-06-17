@@ -1,4 +1,6 @@
+import { CloseOutlined } from "@ant-design/icons";
 import { GroupItem } from "@openim/wasm-client-sdk/lib/types/entity";
+import { Button } from "antd";
 import { t } from "i18next";
 import { useCallback, useRef } from "react";
 
@@ -62,14 +64,57 @@ export function useGroupSettings({ closeOverlay }: { closeOverlay: () => void })
   const tryQuitGroup = () => {
     if (!currentGroupInfo || modalRef.current) return;
 
-    modalRef.current = modal.confirm({
-      title: t("placeholder.exitGroup"),
+    modalRef.current = modal.info({
+      title: null, // t("placeholder.exitGroup")
+      icon: null,
+      footer: null, // 隐藏默认底部按钮
+      className: "rounded-md",
+      // content: (
+      //   <div className="flex items-baseline">
+      //     <div>{t("toast.confirmExitGroup")}</div>
+      //     <span className="text-xs text-[var(--sub-text)]">
+      //       {t("placeholder.exitGroupToast")}
+      //     </span>
+      //   </div>
+      // ),
       content: (
-        <div className="flex items-baseline">
-          <div>{t("toast.confirmExitGroup")}</div>
-          <span className="text-xs text-[var(--sub-text)]">
-            {t("placeholder.exitGroupToast")}
-          </span>
+        <div className="flex flex-col items-center">
+          <Button
+            className="absolute right-2 top-2"
+            type="text"
+            icon={<CloseOutlined />}
+            onClick={() => {
+              modalRef.current = null;
+            }}
+          />
+          <div className="mt-8 text-xl font-medium">{t("toast.confirmExitGroup")}</div>
+          <div className="mt-6 flex items-baseline">
+            <div className="text-xs text-[rgb(0,0,0,0.54)]">
+              {t("toast.confirmExitGroup")}
+              {t("placeholder.exitGroupToast")}
+            </div>
+            {/*<span className="text-xs text-[var(--sub-text)]">*/}
+            {/*  {t("placeholder.exitGroupToast")}*/}
+            {/*</span>*/}
+          </div>
+          <div className="mt-5 flex w-full flex-1">
+            <Button
+              type="primary"
+              className="h-[49px] flex-1 text-sm font-semibold"
+              onClick={async () => {
+                try {
+                  await IMSDK.quitGroup(currentGroupInfo.groupID);
+                  closeOverlay();
+                } catch (error) {
+                  feedbackToast({ error });
+                }
+                modalRef.current = null;
+              }}
+            >
+              {/*{t("placeholder.confirmExit")}*/}
+              {"Yes, I want to quit"}
+            </Button>
+          </div>
         </div>
       ),
       onOk: async () => {
