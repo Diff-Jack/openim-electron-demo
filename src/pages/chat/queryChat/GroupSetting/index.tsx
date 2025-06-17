@@ -42,7 +42,7 @@ const GroupSetting: ForwardRefRenderFunction<OverlayVisibleHandle, unknown> = (
       maskMotion={{
         visible: false,
       }}
-      width={460}
+      width={393}
       getContainer={"#chat-container"}
     >
       {!isPreviewMembers ? (

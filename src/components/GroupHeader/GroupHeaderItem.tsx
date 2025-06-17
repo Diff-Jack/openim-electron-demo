@@ -9,7 +9,7 @@ interface IGroupHeaderItemProps {
 const GroupHeaderItem: FC<IGroupHeaderItemProps> = ({ src, title, onClick }) => {
   return (
     <div
-      className="flex flex-col items-center rounded-xl bg-white p-3"
+      className="flex flex-1 flex-col items-center rounded-xl bg-white p-3"
       onClick={onClick}
     >
       <img src={src} alt="" width={16} className="" />

@@ -26,7 +26,7 @@ const GroupHeaderTab: FC<IGroupHeaderTabProps> = ({ tabs, onChange }) => {
   };
 
   return (
-    <div className="relative mb-3 w-full border-b-[0.5px] border-[#BDBDBD]">
+    <div className="relative mb-3.5 w-full border-b-[0.5px] border-[#BDBDBD]">
       <div className="flex">
         {tabs.map((tab, index) => (
           <button

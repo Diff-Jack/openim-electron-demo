@@ -44,7 +44,7 @@ const GroupMemberList = ({ currentGroupInfo }: { currentGroupInfo: GroupItem }) 
             onClick={() => window.userClick(member.userID, member.groupID)}
           >
             <OIMAvatar src={member.faceURL} text={member.nickname} size={48} />
-            <div className="ml-8 flex max-h-[48px] max-w-full flex-col">
+            <div className="ml-6 flex max-h-[48px] max-w-full flex-col">
               <div className="max-w-full truncate text-base font-medium">
                 {member.nickname}
               </div>

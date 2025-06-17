@@ -81,10 +81,10 @@ const GroupHeader: FC<IGroupHeaderProps> = ({
         editable={hasPermissions}
         onChange={updateGroupName}
       />
-      <div className="mt-1 flex items-center">
+      <div className="mt-2 flex items-center">
         <div className="text-sm text-[#8F8F8F]">ID:{currentGroupInfo?.groupID}</div>
         <img
-          className="ml-2 cursor-pointer"
+          className="ml-1 cursor-pointer"
           width={14}
           src={copy}
           alt=""
@@ -94,7 +94,7 @@ const GroupHeader: FC<IGroupHeaderProps> = ({
           }}
         />
       </div>
-      <div className="mb-6 mt-6 flex flex-1 items-center gap-3">
+      <div className="mx-6 mb-8 mt-8 flex flex-1 gap-3 self-stretch">
         <GroupHeaderItem src={addIcon} title={"Add agent"} onClick={addAgentClick} />
         <GroupHeaderItem src={addIcon} title={"Add friend"} onClick={addFriendClick} />
         <GroupHeaderItem src={quiteIcon} title={"Quite"} onClick={quiteClick} />
