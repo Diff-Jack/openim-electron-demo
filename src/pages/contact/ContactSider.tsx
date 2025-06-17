@@ -3,7 +3,7 @@ import clsx from "clsx";
 import i18n, { t } from "i18next";
 import { motion } from "motion/react";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import my_friends from "@/assets/images/contact/my_friends.png";
 import new_friends from "@/assets/images/contact/new_friends.png";
@@ -95,17 +95,15 @@ const ContactSider = () => {
   );
   const navigate = useNavigate();
 
+  const location = useLocation();
+
   useEffect(() => {
-    if (location.hash.includes("/contact/newFriends")) {
+    if (location.pathname.includes("/contact/newFriends")) {
       setSelectIndex(0);
-    }
-    if (location.hash.includes("/contact/groupNotifications")) {
+    } else if (location.pathname.includes("/contact")) {
       setSelectIndex(1);
     }
-    if (location.hash.includes("/contact/myGroups")) {
-      setSelectIndex(3);
-    }
-  }, []);
+  }, [location.pathname]);
 
   const getBadge = (index: number) => {
     if (index === 0) {
