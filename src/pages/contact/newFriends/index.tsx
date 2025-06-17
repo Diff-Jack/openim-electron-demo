@@ -80,8 +80,10 @@ export const NewFriends = () => {
 
   return (
     <div className="flex h-full w-full flex-col bg-white">
-      <p className="m-5.5 text-base font-extrabold">{t("placeholder.newFriends")}</p>
-      <div className="flex-1 pb-3">
+      <p className="mb-5 mt-6 text-center text-base font-extrabold">
+        {t("placeholder.newFriends")}
+      </p>
+      <div className="flex-1 pb-3 pl-9 pr-10">
         <Virtuoso
           className="h-full overflow-x-hidden"
           data={friendApplicationList}

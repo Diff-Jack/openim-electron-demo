@@ -188,7 +188,7 @@
     "subTitle": "Collaborative work for efficient office tasks",
     "myCreated": "I created",
     "myJoined": "I joined",
-    "newFriends": "New friends",
+    "newFriends": "New friends requests",
     "groupNotification": "Group notification",
     "friendVerification": "Friend verification",
     "groupInfo": "Group information",
@@ -454,15 +454,15 @@
     "custom": "Custom"
   },
   "application": {
-    "agree": "Agree",
-    "refuse": "Refuse",
-    "agreed": "Agreed",
+    "agree": "Add",
+    "refuse": "Reject",
+    "agreed": "Already added",
     "refused": "Refused",
     "information": "Verification Information",
-    "pending": "Pending Verification",
+    "pending": "Waiting for approval to add",
     "applyToJoin": "Apply to Join",
     "applyToAdd": "Apply to Add",
-    "applyToFriend": "Applied to Add You as a Friend"
+    "applyToFriend": "Apply to add you as a friend"
   },
   "errCode": {
     "passwordError": "Password error",
