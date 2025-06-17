@@ -1,6 +1,6 @@
 import { useRequest } from "ahooks";
 import { Empty, Spin } from "antd";
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { GroupedVirtuoso, GroupedVirtuosoHandle } from "react-virtuoso";
 
@@ -16,6 +16,7 @@ export const MyFriends = () => {
   const friendList = useContactStore((state) => state.friendList);
   const virtuoso = useRef<GroupedVirtuosoHandle>(null);
   const alphabetRef = useRef<{ updateCurrentLetter: (letter: string) => void }>(null);
+  const [selectedId, setSelectedId] = useState<string>();
 
   const { data: sectionData, cancel } = useRequest(
     () => formatContactsByWorker(friendList),
@@ -44,6 +45,7 @@ export const MyFriends = () => {
   );
 
   const showUserCard = useCallback((userID: string) => {
+    setSelectedId(userID);
     emit("OPEN_USER_CARD", {
       userID,
     });
@@ -97,11 +99,14 @@ export const MyFriends = () => {
               </div>
             )}
             itemContent={(index) => {
+              const item = sectionData.totalList[index];
+              const id = item.userID;
               return (
                 <FriendListItem
-                  key={sectionData.totalList[index].userID}
-                  friend={sectionData.totalList[index]}
+                  key={id}
+                  friend={item}
                   showUserCard={showUserCard}
+                  isActive={selectedId === id}
                 />
               );
             }}

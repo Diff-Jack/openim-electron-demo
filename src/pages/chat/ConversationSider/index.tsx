@@ -94,7 +94,7 @@ const ToolBar: React.FC<ToolBarProps> = ({ onSearch, onCreatAgent, ...divProps }
         className="ml-3 inline-flex items-center rounded-[62px] bg-[#DCFFF4] px-[13px] py-[7px] text-[#17B09E]"
         onClick={onCreatAgent}
       >
-        <Chat className="mr-[14px]" /> Add new friend
+        <Chat className="mr-[14px]" /> Create Agent Group
       </motion.button>
     </div>
   );

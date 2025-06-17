@@ -83,6 +83,7 @@ export const NewFriends = () => {
       <p className="mb-5 mt-6 text-center text-base font-extrabold">
         {t("placeholder.newFriends")}
       </p>
+      <div className="fixed bottom-0 h-[35vh] w-full bg-[linear-gradient(to_bottom,rgba(255,255,255,1),rgba(235,255,250,1))] bg-cover" />
       <div className="flex-1 pb-3 pl-9 pr-10">
         <Virtuoso
           className="h-full overflow-x-hidden"

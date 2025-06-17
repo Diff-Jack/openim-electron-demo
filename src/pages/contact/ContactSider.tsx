@@ -71,13 +71,13 @@ interface AddProps extends React.HTMLAttributes<HTMLDivElement> {
   onAdd?: () => void;
 }
 
-const Add: React.FC<AddProps> = (props) => {
+const Add: React.FC<AddProps> = ({ onAdd, ...divProps }) => {
   return (
-    <div className="flex justify-center py-3" {...props}>
+    <div className="flex justify-center py-3" {...divProps}>
       <motion.button
         whileHover={{ scale: 1.1 }}
         className="inline-flex items-center rounded-[62px] bg-[#DCFFF4] px-[30px] py-[11px] text-[#17B09E]"
-        onClick={props.onAdd}
+        onClick={onAdd}
       >
         <AddIcon className="mr-[14px]" /> Add new friend
       </motion.button>

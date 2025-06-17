@@ -1,17 +1,23 @@
 import { FriendUserItem } from "@openim/wasm-client-sdk/lib/types/entity";
+import clsx from "clsx";
 
 import OIMAvatar from "@/components/OIMAvatar";
 
 const FriendListItem = ({
   friend,
   showUserCard,
+  isActive,
 }: {
   friend: FriendUserItem;
   showUserCard: (userID: string) => void;
+  isActive?: boolean;
 }) => {
   return (
     <div
-      className="mb-2 flex items-center rounded-md pb-2 pl-2 pt-2 transition-colors hover:bg-[#F3F3F3]"
+      className={clsx([
+        "mb-2 flex cursor-pointer items-center rounded-md pb-2 pl-2 pt-2 transition-colors hover:bg-gradient-to-r hover:from-[#ECFFF9] hover:to-[#F7FFFC]",
+        { "bg-gradient-to-r from-[#ECFFF9] to-[#F7FFFC]": isActive },
+      ])}
       onClick={() => showUserCard(friend.userID)}
     >
       <OIMAvatar
