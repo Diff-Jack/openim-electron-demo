@@ -8,6 +8,7 @@ import clsx from "clsx";
 import { t } from "i18next";
 import { memo, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
+
 import OIMAvatar from "@/components/OIMAvatar";
 import { useConversationStore, useUserStore } from "@/store";
 import { formatConversionTime, getConversationContent } from "@/utils/imCommon";
@@ -55,8 +56,8 @@ const ConversationItem = ({ isActive, conversation }: IConversationProps) => {
     <div
       className={clsx(
         styles["conversation-item"],
-        "border border-transparent",
-        isActive && `bg-[var(--primary-active)]`,
+        "cursor-pointer border-b-[1px] border-l-[1px] border-[#e6e6e663]",
+        isActive && `bg-[#F3F3F3]`,
       )}
       onClick={toSpecifiedConversation}
     >
@@ -65,19 +66,23 @@ const ConversationItem = ({ isActive, conversation }: IConversationProps) => {
           src={conversation.faceURL}
           isgroup={Boolean(conversation.groupID)}
           text={conversation.showName}
+          shape="square"
+          size={62}
         />
       </Badge>
 
-      <div className="ml-3 flex h-11 flex-1 flex-col justify-between overflow-hidden">
-        <div className="flex items-center justify-between">
-          <div className="flex-1 truncate font-medium">{conversation.showName}</div>
-          <div className="ml-2 text-xs text-[var(--sub-text)]">{latestMessageTime}</div>
+      <div className="ml-4 flex flex-1 flex-col justify-between">
+        <div className="mb-[6px] flex items-center justify-between">
+          <div className="flex-1 truncate text-base font-medium leading-[19px] text-[#494949]">
+            {conversation.showName}
+          </div>
+          <div className="ml-2 text-xs text-[#B0B0B0]">{latestMessageTime}</div>
         </div>
 
         <div className="flex items-center">
-          <div className="flex min-h-[16px] flex-1 items-center overflow-hidden text-xs">
+          <div className="flex min-h-[15px] flex-1 items-center text-[13px] leading-[15px]">
             <div
-              className="truncate text-[rgba(81,94,112,0.5)]"
+              className="line-clamp-2 text-[#6C6C6C]"
               dangerouslySetInnerHTML={{
                 __html: latestMessageContent,
               }}
