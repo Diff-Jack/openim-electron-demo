@@ -1,9 +1,11 @@
 import { ApplicationHandleResult } from "@openim/wasm-client-sdk";
 import { FriendApplicationItem } from "@openim/wasm-client-sdk/lib/types/entity";
+import { Empty } from "antd";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { Virtuoso } from "react-virtuoso";
 
+import EmptyIcon from "@/assets/images/contact/empty.png";
 import ApplicationItem, { AccessFunction } from "@/components/ApplicationItem";
 import { IMSDK } from "@/layout/MainContentWrap";
 import { useUserStore } from "@/store";
@@ -85,21 +87,37 @@ export const NewFriends = () => {
       </p>
       <div className="fixed bottom-0 h-[35vh] w-full bg-[linear-gradient(to_bottom,rgba(255,255,255,1),rgba(235,255,250,1))] bg-cover" />
       <div className="flex-1 pb-3 pl-9 pr-10">
-        <Virtuoso
-          className="h-full overflow-x-hidden"
-          data={friendApplicationList}
-          itemContent={(_, item) => (
-            <ApplicationItem
-              key={`${
-                currentUserID === item.fromUserID ? item.toUserID : item.fromUserID
-              }${item.createTime}`}
-              source={item}
-              currentUserID={currentUserID}
-              onAccept={onAccept as AccessFunction}
-              onReject={onReject as AccessFunction}
-            />
-          )}
-        />
+        {friendApplicationList.length ? (
+          <Virtuoso
+            className="h-full overflow-x-hidden"
+            data={friendApplicationList}
+            itemContent={(_, item) => (
+              <ApplicationItem
+                key={`${
+                  currentUserID === item.fromUserID ? item.toUserID : item.fromUserID
+                }${item.createTime}`}
+                source={item}
+                currentUserID={currentUserID}
+                onAccept={onAccept as AccessFunction}
+                onReject={onReject as AccessFunction}
+              />
+            )}
+          />
+        ) : (
+          <Empty
+            image={EmptyIcon}
+            styles={{
+              image: {
+                display: "flex",
+                justifyContent: "center",
+                height: 65,
+                marginBottom: "24px",
+              },
+            }}
+            className="mt-[30%]"
+            description="You currently have no new friends"
+          />
+        )}
       </div>
     </div>
   );

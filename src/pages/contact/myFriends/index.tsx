@@ -10,6 +10,7 @@ import { emit } from "@/utils/events";
 
 import AlphabetIndex from "./AlphabetIndex";
 import FriendListItem from "./FriendListItem";
+import EmptyIcon from "@/assets/images/contact/empty.png";
 
 export const MyFriends = () => {
   const { t } = useTranslation();
@@ -81,7 +82,19 @@ export const MyFriends = () => {
       {!sectionData ? (
         <Spin />
       ) : !sectionData.groupCounts.length ? (
-        <Empty className="mt-[30%]" image={Empty.PRESENTED_IMAGE_SIMPLE} />
+        <Empty
+          image={EmptyIcon}
+          styles={{
+            image: {
+              display: "flex",
+              justifyContent: "center",
+              height: 65,
+              marginBottom: "24px",
+            },
+          }}
+          className="mt-[30%]"
+          description="You currently have no friends"
+        />
       ) : (
         <div className="relative mt-4 flex-1 overflow-auto pl-10 pr-4">
           <AlphabetIndex
