@@ -194,6 +194,7 @@ const LeftNavBar = memo(() => {
       onOk: async () => {
         try {
           await userLogout();
+          emit("LOGOUT", { type: "quit" });
         } catch (error) {
           feedbackToast({ error });
         }

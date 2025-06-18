@@ -21,6 +21,7 @@ type EmitterEvents = {
   COPY_ID: 'open' | 'close';
   /** 0-add friend, 1-add group */
   OPEN_ADD: number
+  LOGOUT: { type: 'kick' | 'expired' | 'quit' | 'missing' }
 };
 
 export type SelectUserParams = {

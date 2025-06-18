@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
 import { useConversationStore, useUserStore } from "@/store";
-import { emit } from "@/utils/events";
+import emitter, { emit } from "@/utils/events";
 import { getIMToken, getIMUserID } from "@/utils/storage";
 
 // const isElectronProd = import.meta.env.MODE !== "development" && window.electronAPI;
@@ -30,7 +30,9 @@ export const MainContentWrap = () => {
       const IMToken = await getIMToken();
       const IMUserID = await getIMUserID();
       if (!IMToken || !IMUserID) {
+        // todo delete
         navigate("/login");
+        emit("LOGOUT", { type: "missing" });
         return;
       }
     };
@@ -72,6 +74,28 @@ export const MainContentWrap = () => {
     };
 
     initSettingStore();
+  }, []);
+
+  const parentOrigin = import.meta.env.VITE_PARENT_IFRAME_ORIGIN as string;
+
+  useEffect(() => {
+    const logoutHandler = ({
+      type,
+    }: {
+      type: "kick" | "expired" | "quit" | "missing";
+    }) => {
+      window.parent.postMessage(
+        {
+          eventName: "logout",
+          type,
+        },
+        parentOrigin,
+      );
+    };
+
+    emitter.on("LOGOUT", logoutHandler);
+
+    return () => emitter.off("LOGOUT", logoutHandler);
   }, []);
 
   return <Outlet />;

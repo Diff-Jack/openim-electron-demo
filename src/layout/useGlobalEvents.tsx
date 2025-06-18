@@ -26,6 +26,7 @@ import {
 import { useConversationStore, useUserStore } from "@/store";
 import { useContactStore } from "@/store/contact";
 import { feedbackToast } from "@/utils/common";
+import { emit } from "@/utils/events";
 import { initStore } from "@/utils/imCommon";
 import { clearIMProfile, getIMToken, getIMUserID } from "@/utils/storage";
 
@@ -113,6 +114,7 @@ export function useGlobalEvent() {
     if (!IMToken || !IMUserID) {
       clearIMProfile();
       navigate("/login");
+      emit("LOGOUT", { type: "missing" });
       return;
     }
     tryLogin();
@@ -154,7 +156,9 @@ export function useGlobalEvent() {
     } catch (error) {
       console.error(error);
       if ((error as WsResponse).errCode !== 10102) {
+        // todo delete
         navigate("/login");
+        emit("LOGOUT", { type: "missing" });
       }
     }
     updateIsLogining(false);
@@ -217,22 +221,24 @@ export function useGlobalEvent() {
     console.error("connectFailedHandler", errCode, errMsg);
 
     if (errCode === 705) {
-      tryOut(t("toast.loginExpiration"));
+      tryOut(t("toast.loginExpiration"), "expired");
     }
   };
   const connectSuccessHandler = () => {
     updateConnectState("success");
     console.log("connect success...");
   };
-  const kickHandler = () => tryOut(t("toast.accountKicked"));
-  const expiredHandler = () => tryOut(t("toast.loginExpiration"));
+  const kickHandler = () => tryOut(t("toast.accountKicked"), "kick");
+  const expiredHandler = () => tryOut(t("toast.loginExpiration"), "kick");
 
-  const tryOut = (msg: string) =>
+  const tryOut = (msg: string, type: "kick" | "expired" | "quit" | "missing") =>
     feedbackToast({
       msg,
       error: msg,
       onClose: () => {
-        userLogout(true);
+        userLogout(true).then(() => {
+          emit("LOGOUT", { type });
+        });
       },
     });
 

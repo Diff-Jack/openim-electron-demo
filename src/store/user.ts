@@ -65,6 +65,7 @@ export const useUserStore = create<UserStore>()((set, get) => ({
     set({ selfInfo: {} as BusinessUserInfo, progress: 0 });
     useContactStore.getState().clearContactStore();
     useConversationStore.getState().clearConversationStore();
+    // todo delete
     router.navigate("/login");
   },
 }));
