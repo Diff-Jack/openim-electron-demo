@@ -39,6 +39,10 @@ export const MainContentWrap = () => {
     };
 
     loginCheck();
+    sendMessageToParent({
+      eventName: "router_change",
+      pathname: location.pathname,
+    });
   }, [location.pathname]);
 
   useEffect(() => {
