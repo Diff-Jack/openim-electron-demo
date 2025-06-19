@@ -6,6 +6,7 @@ import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useConversationStore, useUserStore } from "@/store";
 import emitter, { emit } from "@/utils/events";
 import { getIMToken, getIMUserID } from "@/utils/storage";
+import { sendMessageToParent } from "@/utils/iframe";
 
 // const isElectronProd = import.meta.env.MODE !== "development" && window.electronAPI;
 
@@ -76,21 +77,16 @@ export const MainContentWrap = () => {
     initSettingStore();
   }, []);
 
-  const parentOrigin = import.meta.env.VITE_PARENT_IFRAME_ORIGIN as string;
-
   useEffect(() => {
     const logoutHandler = ({
       type,
     }: {
       type: "kick" | "expired" | "quit" | "missing";
     }) => {
-      window.parent.postMessage(
-        {
-          eventName: "logout",
-          type,
-        },
-        parentOrigin,
-      );
+      sendMessageToParent({
+        eventName: "logout",
+        type,
+      });
     };
 
     emitter.on("LOGOUT", logoutHandler);

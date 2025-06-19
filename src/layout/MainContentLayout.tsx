@@ -6,6 +6,7 @@ import { Outlet, useMatches, useNavigate } from "react-router-dom";
 
 import { useContactStore, useConversationStore, useUserStore } from "@/store";
 import { emit } from "@/utils/events";
+import { listenParentMessage, sendMessageToParent } from "@/utils/iframe";
 
 import LeftNavBar from "./LeftNavBar";
 import TopSearchBar from "./TopSearchBar";
@@ -45,14 +46,8 @@ export const MainContentLayout = () => {
   const loadingTip = isLogining ? t("toast.loading") : `${progress}%`;
   const showLockLoading = isLogining || (reinstall && syncState === "loading");
 
-  const parentOrigin = import.meta.env.VITE_PARENT_IFRAME_ORIGIN as string;
-
   useEffect(() => {
-    const handleMessage = (event: MessageEvent) => {
-      if (event.origin !== parentOrigin) {
-        return;
-      }
-
+    const cleanup = listenParentMessage((event: MessageEvent) => {
       const { eventName } = (event.data || {}) as {
         eventName: "copy_id" | "open_contact" | "open_messages";
       };
@@ -72,22 +67,17 @@ export const MainContentLayout = () => {
       };
 
       mapper[eventName]?.();
-    };
+    });
 
-    window.addEventListener("message", handleMessage);
-
-    return () => window.removeEventListener("message", handleMessage);
+    return () => cleanup();
   }, []);
 
   const sendUnreadCount = (id: "messages" | "contacts", count?: number) => {
-    window.parent.postMessage(
-      {
-        eventName: "update_unread_count",
-        id: id,
-        count: count,
-      },
-      parentOrigin,
-    );
+    sendMessageToParent({
+      eventName: "update_unread_count",
+      id: id,
+      count: count,
+    });
   };
 
   useEffect(() => {
